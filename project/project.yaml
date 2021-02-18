@@ -1,0 +1,26 @@
+kind: project
+metadata:
+  name: cleco-mnist-demo
+spec:
+  functions:
+  - url: components/get_prep_data.py
+    name: get-prep-data
+    kind: job
+    image: mlrun/ml-models
+  - url: components/train_eval_model.py
+    name: train-eval-model
+    kind: job
+    image: mlrun/ml-models
+  - url: components/deploy_model.py
+    name: deploy-model
+    kind: serving
+    image: mlrun/ml-models
+  workflows:
+  - name: main
+    path: pipeline.py
+  artifacts: []
+  artifact_path: /User/artifacts/{{run.project}}/{{workflow.uid}}
+  source: ''
+  subpath: ''
+  origin_url: ''
+  desired_state: online
