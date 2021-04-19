@@ -1,6 +1,6 @@
 kind: project
 metadata:
-  name: cleco-mnist-demo
+  name: igz-mnist-demo
 spec:
   functions:
   - url: components/get_prep_data.py

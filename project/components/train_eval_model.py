@@ -3,6 +3,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, Flatten
 from tensorflow.keras.layers import Conv2D, MaxPooling2D
 from tensorflow.keras import backend as K
+from tensorflow.keras.callbacks import TensorBoard
 import numpy as np
 
 def build_model(num_classes):
@@ -35,6 +36,10 @@ def handler(context):
     
     # Build model
     model = build_model(num_classes)
+    
+    # Define training callbacks
+    tensorboard_callback = TensorBoard(log_dir=f"/User/tensorboard/{context.name}-{context.uid}")
+    callbacks = [tensorboard_callback]
 
     # Train model
     hist = model.fit(X_train,
@@ -42,7 +47,8 @@ def handler(context):
                      batch_size=batch_size,
                      epochs=epochs,
                      verbose=1,
-                     validation_data=(X_test, y_test))
+                     validation_data=(X_test, y_test),
+                     callbacks=callbacks)
     context.logger.info("The model has successfully trained")
 
     # Evaluate model

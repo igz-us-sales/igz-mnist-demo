@@ -25,7 +25,7 @@ def init_functions(functions: dict, project=None, secrets=None):
 )
 def kfpipeline(batch_size:int=128,
                num_classes:int=10,
-               epochs:int=25,
+               epochs:int=5,
                debug_logs:bool=True):    
     
     # Get data from feature store, prep, train/test split
